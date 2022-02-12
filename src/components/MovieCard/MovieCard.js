@@ -1,7 +1,7 @@
 import React from 'react';
 
-const MovieCard = () => {
-  return <div>Movie Card</div>;
+const MovieCard = ({ data }) => {
+  return <div>{data.title}</div>;
 };
 
 export default MovieCard;

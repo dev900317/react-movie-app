@@ -1,5 +1,6 @@
 import './App.scss';
 import React from 'react';
+
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import Home from './components/Home/Home';
 import Header from './components/Header/Header';

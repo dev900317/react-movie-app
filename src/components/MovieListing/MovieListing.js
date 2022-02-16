@@ -1,36 +1,35 @@
 import React from 'react';
-import { getAllMovies } from '../../features/movies/movieSlice';
+import { getAllMovies, getAllShows } from '../../features/movies/movieSlice';
 import { useSelector } from 'react-redux';
 import MovieCard from '../MovieCard/MovieCard';
 import './MovieListing.scss';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const container = {
-  hidden: { opacity: 0 },
+  hidden: {
+    opacity: 0,
+    y: 80,
+  },
   show: {
     opacity: 1,
+    y: 0,
     transition: {
-      staggerChildren: 0.5,
+      duration: 1.2,
     },
   },
 };
 
-const listItem = {
-  hidden: { opacity: 0 },
-  show: { opacity: 1 },
-};
-
 const MovieListing = () => {
   const movies = useSelector(getAllMovies);
+  const shows = useSelector(getAllShows);
 
-  let renderMovies = '';
+  let renderMovies,
+    renderShows = '';
 
   renderMovies =
     movies.Response === 'True' ? (
       movies.Search.map((movie, index) => (
-        <motion.div variants={listItem} initial="hidden" animate="show">
-          <MovieCard key={index} data={movie} />
-        </motion.div>
+        <MovieCard key={index} data={movie} />
       ))
     ) : (
       <div className="movies-error">
@@ -38,21 +37,40 @@ const MovieListing = () => {
       </div>
     );
 
+  renderShows =
+    shows.Response === 'True' ? (
+      shows.Search.map((show, index) => <MovieCard key={index} data={show} />)
+    ) : (
+      <div className="movies-error">
+        <h3>{shows.Error}</h3>
+      </div>
+    );
+
   return (
     <div className="movie-wrapper">
       <div className="movie-list">
         <h2>Movies</h2>
-        <AnimatePresence>
-          <motion.div
-            exit={{ opacity: 0 }}
-            variants={container}
-            initial="hidden"
-            animate="show"
-            className="movie-container"
-          >
-            {renderMovies}
-          </motion.div>
-        </AnimatePresence>
+        <motion.div
+          exit={{ opacity: 0 }}
+          variants={container}
+          initial="hidden"
+          animate="show"
+          className="movie-container"
+        >
+          {renderMovies}
+        </motion.div>
+      </div>
+      <div className="movie-list">
+        <h2>Shows</h2>
+        <motion.div
+          exit={{ opacity: 0 }}
+          variants={container}
+          initial="hidden"
+          animate="show"
+          className="movie-container"
+        >
+          {renderShows}
+        </motion.div>
       </div>
     </div>
   );

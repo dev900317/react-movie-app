@@ -4,6 +4,8 @@ import { useSelector } from 'react-redux';
 import MovieCard from '../MovieCard/MovieCard';
 import './MovieListing.scss';
 import { motion } from 'framer-motion';
+import Slider from 'react-slick';
+import settings from '../../apis/settings';
 
 const container = {
   hidden: {
@@ -57,7 +59,7 @@ const MovieListing = () => {
           animate="show"
           className="movie-container"
         >
-          {renderMovies}
+          <Slider {...settings}>{renderMovies}</Slider>
         </motion.div>
       </div>
       <div className="movie-list">
@@ -69,7 +71,7 @@ const MovieListing = () => {
           animate="show"
           className="movie-container"
         >
-          {renderShows}
+          <Slider {...settings}>{renderShows}</Slider>
         </motion.div>
       </div>
     </div>

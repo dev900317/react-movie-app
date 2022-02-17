@@ -19,3 +19,33 @@
     height: 38px;
   }
 }
+
+.search-bar {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+
+  form {
+    display: flex;
+    width: 70%;
+    justify-content: center;
+
+    input {
+      font-size: 18px;
+      width: 100%;
+      padding: 5px 5px 5px 10px;
+      height: 38px;
+      outline: none;
+    }
+
+    button {
+      padding: 0px 8px;
+      display: grid;
+      place-items: center;
+
+      .search-icon {
+        font-size: 22px;
+      }
+    }
+  }
+}
